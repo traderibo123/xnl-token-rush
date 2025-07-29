@@ -6,6 +6,7 @@ body {
   background-size: cover;
   color: #ffffff;
   text-align: center;
+  font-size: clamp(14px, 2.5vw, 18px);
 }
 
 h1.game-title {
@@ -41,15 +42,24 @@ h1.game-title {
   50% { transform: translateY(-10px); }
 }
 
+.input-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
 .input-area input {
   padding: 8px;
   font-size: 16px;
   border-radius: 6px;
   border: none;
+  width: 200px;
 }
 
 .input-area button {
-  margin-left: 10px;
   background-color: #00f0ff;
   color: #000;
   font-weight: bold;
@@ -98,6 +108,7 @@ h1.game-title {
 
 .card-options img {
   width: 150px;
+  max-width: 100%;
   height: auto;
   border-radius: 12px;
   border: 4px solid white;
@@ -191,5 +202,57 @@ footer {
   100% {
     opacity: 0;
     transform: translate(-50%, -100%);
+  }
+}
+
+/* 🌐 MOBİL DÜZENLEMELER */
+@media (max-width: 768px) {
+  #frog-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .card-options {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .card-options img {
+    width: 100px;
+  }
+
+  #speech-text {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #status-bar {
+    flex-direction: column;
+    font-size: 16px;
+    gap: 10px;
+  }
+
+  .score-box {
+    width: 140px;
+    font-size: 1.5rem;
+  }
+
+  .start-frog {
+    width: 70px;
+  }
+
+  .input-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .input-area input,
+  .input-area button {
+    width: 80%;
+    margin: 6px 0;
+  }
+
+  h1.game-title {
+    font-size: 2rem;
   }
 }
