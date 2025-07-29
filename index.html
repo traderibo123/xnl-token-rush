@@ -7,53 +7,38 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1 class="game-title">$XNL Token Rush</h1>
+  <h1>$XNL Token Rush</h1>
 
-  <div class="start-screen" id="start-screen">
-    <img src="assets/frog.png" alt="Frog" id="frog-img" />
-    <div class="input-area">
-      <input type="text" id="player-name" placeholder="Your Name" />
-      <button onclick="startGame()">Start</button>
+  <div id="frog-and-text">
+    <img id="frog" src="assets/frog.png" alt="Frog" />
+    <div id="speech-text">
+      Tokenize this for me:<br /><strong id="property-name">PLOT</strong>
     </div>
   </div>
 
-  <div class="game-container hidden" id="game-container">
-    <div id="frog-container">
-      <img src="assets/frog.png" alt="Frog" id="frog-img" />
-      <div id="speech-text">
-        Tokenize this for me:<br><span id="property-name">HOUSE</span>
-      </div>
+  <div id="property-options">
+    <!-- Example placeholders -->
+    <div class="property-card">
+      <p>TOWER</p>
+      <img src="assets/property_icons/Tower.png" alt="Tower" />
     </div>
-
-    <div class="card-options" id="card-options"></div>
-
-    <div id="status-bar">
-      <div class="status-item">⏱ Time: <span id="time">60</span>s</div>
-      <div class="status-item">🪙 Score: <span id="score">0</span> $XNL</div>
+    <div class="property-card">
+      <p>WAREHOUSE</p>
+      <img src="assets/property_icons/Warehouse.png" alt="Warehouse" />
+    </div>
+    <div class="property-card">
+      <p>PLOT</p>
+      <img src="assets/property_icons/Plot.png" alt="Plot" />
     </div>
   </div>
 
-  <div id="game-over" class="hidden">
-    <h2 class="game-over-title">Game Over!</h2>
-    <p>🎉 Well done, Novastars!</p>
-    <p>🏁 Final Score: <span id="final-score">0</span> $XNL</p>
-
-    <div class="visitor-counter">
-      👥 Visited by Novastars: <span id="visitor-count">Loading...</span>
-    </div>
-
-    <div id="leaderboard" class="leaderboard-section">
-      <h3>🏆 Top Novastars</h3>
-      <ul id="leaderboard-list"></ul>
-    </div>
-
-    <button class="share-button" onclick="shareOnTwitter()">Share on X</button>
+  <div class="stats">
+    <div class="stat">⏱ Time: <span id="timer">55s</span></div>
+    <div class="stat">🪙 Score: <span id="score">0 $XNL</span></div>
   </div>
 
-  <div class="developer-credit">
-    Built by <a href="https://x.com/traderibo123" target="_blank">@traderibo123</a> — Powered by <strong>Novastro 🚀</strong>
-  </div>
-
-  <script type="module" src="script.js"></script>
+  <footer>
+    Built by <span class="dev">@traderibo123</span> — Powered by <strong>Novastro 🚀</strong>
+  </footer>
 </body>
 </html>
