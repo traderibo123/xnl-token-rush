@@ -9,36 +9,38 @@
 <body>
   <h1>$XNL Token Rush</h1>
 
-  <div id="frog-and-text">
-    <img id="frog" src="assets/frog.png" alt="Frog" />
-    <div id="speech-text">
-      Tokenize this for me:<br /><strong id="property-name">PLOT</strong>
-    </div>
+  <!-- GİRİŞ EKRANI -->
+  <div id="startScreen" class="start-screen">
+    <h2>Welcome to $XNL Token Rush</h2>
+    <input type="text" id="nicknameInput" placeholder="Enter your nickname" />
+    <button id="startButton">Start Game</button>
   </div>
 
-  <div id="property-options">
-    <!-- Example placeholders -->
-    <div class="property-card">
-      <p>TOWER</p>
-      <img src="assets/property_icons/Tower.png" alt="Tower" />
+  <!-- OYUN ALANI -->
+  <div id="gameContainer" class="hidden">
+    <div id="frog-and-text">
+      <img id="frog" src="assets/frog.png" alt="Frog" />
+      <div id="speech-text">
+        Tokenize this for me:<br /><strong id="property-name">PLOT</strong>
+      </div>
     </div>
-    <div class="property-card">
-      <p>WAREHOUSE</p>
-      <img src="assets/property_icons/Warehouse.png" alt="Warehouse" />
-    </div>
-    <div class="property-card">
-      <p>PLOT</p>
-      <img src="assets/property_icons/Plot.png" alt="Plot" />
-    </div>
-  </div>
 
-  <div class="stats">
-    <div class="stat">⏱ Time: <span id="timer">55s</span></div>
-    <div class="stat">🪙 Score: <span id="score">0 $XNL</span></div>
+    <div id="property-options">
+      <div class="property-card"><p>TOWER</p><img src="assets/property_icons/Tower.png" alt="Tower" /></div>
+      <div class="property-card"><p>WAREHOUSE</p><img src="assets/property_icons/Warehouse.png" alt="Warehouse" /></div>
+      <div class="property-card"><p>PLOT</p><img src="assets/property_icons/Plot.png" alt="Plot" /></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">⏱ Time: <span id="timer">60s</span></div>
+      <div class="stat">🪙 Score: <span id="score">0 $XNL</span></div>
+    </div>
   </div>
 
   <footer>
     Built by <span class="dev">@traderibo123</span> — Powered by <strong>Novastro 🚀</strong>
   </footer>
+
+  <script src="script.js" type="module"></script>
 </body>
 </html>
