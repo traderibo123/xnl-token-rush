@@ -1,6 +1,6 @@
 const properties = [
   "Apartment", "Bank", "Castle", "Factory", "Field",
-  "Land", "Office", "Plot", "Power Plant", "ShoppingMall",
+  "Land", "Office", "Plot", "Powerplant", "ShoppingMall",
   "Stadium", "Tower", "Villa", "Warehouse", "House"
 ];
 
