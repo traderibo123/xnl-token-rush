@@ -136,7 +136,6 @@ h1.game-title {
   text-decoration: none;
 }
 
-/* 📱 Mobil görünüm düzenlemesi */
 @media (max-width: 600px) {
   .card-options {
     display: grid;
