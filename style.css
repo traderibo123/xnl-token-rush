@@ -1,4 +1,4 @@
-/* Genel stil ayarları */
+/* GENEL AYARLAR */
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -10,7 +10,6 @@ body {
   text-align: center;
 }
 
-/* Başlık */
 .game-title {
   font-size: 3rem;
   font-weight: bold;
@@ -19,17 +18,14 @@ body {
   text-shadow: 0 0 10px #00f0ff;
 }
 
-/* Başlangıç alanı */
+/* BAŞLANGIÇ EKRANI */
 .start-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
   margin-top: 40px;
 }
 
 .input-area {
   display: flex;
+  justify-content: center;
   gap: 10px;
   margin-top: 10px;
 }
@@ -54,19 +50,18 @@ body {
   background-color: #00cce0;
 }
 
-/* Oyun ekranı */
+/* OYUN ALANI */
 .game-container {
   margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 #frog-container {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 #frog-img {
@@ -80,17 +75,17 @@ body {
   color: white;
 }
 
-/* Kart seçenekleri */
+/* VARLIK KARTLARI */
 .card-options {
   display: flex;
   justify-content: center;
-  gap: 20px;
   flex-wrap: wrap;
+  gap: 20px;
   margin-top: 20px;
 }
 
 .card-options img {
-  width: 120px;
+  width: 140px;
   height: auto;
   border: 4px solid white;
   border-radius: 10px;
@@ -103,31 +98,22 @@ body {
   border-color: #00f0ff;
 }
 
-/* Oyun durumu göstergesi */
+/* SÜRE & SKOR GÖSTERGESİ */
 #status-bar {
   display: flex;
-  gap: 20px;
   justify-content: center;
-  margin-top: 20px;
-  font-size: 1.1rem;
+  gap: 30px;
+  margin-top: 25px;
+  font-size: 1.2rem;
 }
 
-#status-bar span {
+.status-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
-.score-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  display: inline-block;
-}
-
-/* Oyun bitti ekranı */
+/* OYUN BİTTİ EKRANI */
 #game-over {
   margin-top: 40px;
 }
@@ -135,7 +121,6 @@ body {
 .game-over-title {
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 15px;
   color: #00f0ff;
   text-shadow: 0 0 5px #00f0ff;
 }
@@ -156,19 +141,19 @@ body {
   background-color: #00cce0;
 }
 
-/* Alt bilgi */
+/* ALT BİLGİ */
 .developer-credit {
   margin-top: 30px;
-  font-size: 0.8rem;
-  opacity: 0.8;
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
-/* Gizli alan */
+/* GİZLİ ALAN */
 .hidden {
   display: none;
 }
 
-/* Mobil uyumluluk */
+/* MOBİL UYUMLULUK */
 @media (max-width: 768px) {
   .game-title {
     font-size: 2rem;
@@ -177,7 +162,6 @@ body {
   .input-area {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
   }
 
   .input-area input,
@@ -216,15 +200,8 @@ body {
 
   #status-bar {
     flex-direction: row;
-    justify-content: center;
-    gap: 14px;
-    font-size: 0.95rem;
-    margin-top: 15px;
-  }
-
-  .score-box {
-    font-size: 1.2rem;
-    padding: 10px 14px;
+    gap: 20px;
+    font-size: 1rem;
   }
 
   .share-button {
