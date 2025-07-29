@@ -37,7 +37,12 @@
 
       <div class="visitor-counter">
         👥 Visited by Novastars:
-        <img src="https://visitcount.itsvg.in/api?id=xnl-token-rush&label=Visitors&color=0&icon=👾&pretty=true" style="vertical-align: middle; height: 20px;" />
+        <span id="visitor-count">Loading...</span>
+      </div>
+
+      <div id="leaderboard" class="leaderboard-section">
+        <h3>🏆 Top Novastars</h3>
+        <ul id="leaderboard-list"></ul>
       </div>
 
       <button class="share-button" onclick="shareOnTwitter()">Share on X</button>
@@ -48,6 +53,6 @@
     Built by <a href="https://x.com/traderibo123" target="_blank">@traderibo123</a> — Powered by <strong>Novastro 🚀</strong>
   </div>
 
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
