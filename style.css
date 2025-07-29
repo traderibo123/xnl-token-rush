@@ -8,11 +8,11 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  position: relative;
   min-height: 100vh;
+  position: relative;
 }
 
-/* Sayfanın alt sağ köşesindeki saydam Novastro logosu */
+/* Arka planda saydam Novastro logosu */
 body::after {
   content: "";
   position: fixed;
@@ -61,15 +61,6 @@ body::after {
   font-size: 20px;
 }
 
-#tokenize-request {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 15px 0;
-  color: #ffffff;
-  text-shadow: 1px 1px 4px #000000;
-  text-align: center;
-}
-
 #frog-container {
   position: relative;
   max-width: 300px;
@@ -77,7 +68,11 @@ body::after {
   justify-content: center;
   align-items: center;
   gap: 12px;
-  margin: 20px 0;
+  margin: 30px 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 0 12px #00ffc3;
 }
 
 #frog-container img {
@@ -89,6 +84,42 @@ body::after {
   max-height: 60px;
   width: auto;
   opacity: 0.9;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 2px solid #333;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  max-width: 240px;
+  text-align: center;
+  animation: pulse 1s infinite;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent;
+}
+
+/* Efektli yazı animasyonu */
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  50% { transform: translateX(-50%) scale(1.05); opacity: 0.9; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
 }
 
 #options.card-options {
@@ -111,8 +142,8 @@ body::after {
 }
 
 #options img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 12px #00ffc3;
+  transform: scale(1.08);
+  box-shadow: 0 0 16px #00ffc3, 0 0 6px #fff;
 }
 
 #game-over {
@@ -138,4 +169,15 @@ body::after {
 @keyframes floatUp {
   0% { opacity: 1; transform: translate(-50%, 0); }
   100% { opacity: 0; transform: translate(-50%, -60px); }
+}
+
+@media (max-width: 600px) {
+  #frog-container {
+    flex-direction: column;
+  }
+
+  #options img {
+    width: 90px;
+    height: 90px;
+  }
 }
