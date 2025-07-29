@@ -1,8 +1,7 @@
-
 const properties = [
   "Apartment", "Bank", "Castle", "Factory", "Field",
   "Land", "Office", "Plot", "Powerplant", "ShoppingMall",
-  "Stadium", "Tower", "Villa", "Warehouse", "house"
+  "Stadium", "Tower", "Villa", "Warehouse", "House"
 ];
 
 let score = 0;
@@ -37,7 +36,7 @@ function showScoreChange(value) {
 function nextQuestion() {
   optionsContainer.innerHTML = "";
   const correct = properties[Math.floor(Math.random() * properties.length)];
-  targetProperty.textContent = correct.toUpperCase();
+  document.getElementById("tokenize-request").innerText = "Tokenize this for me: " + correct.toUpperCase();
   const choices = getRandomProperties(correct);
   choices.forEach(choice => {
     const img = document.createElement("img");
@@ -78,9 +77,7 @@ function startGame() {
 }
 
 function shareOnX() {
-  const url = "https://twitter.com/intent/tweet?text=" + 
-    encodeURIComponent(`${nickname} scored ${score} XNL in XNL Token Rush! 🚀
-@Novastro_xyz @traderibo123
-Play now!`);
+  const url = "https://twitter.com/intent/tweet?text=" +
+    encodeURIComponent(`${nickname} scored ${score} XNL in XNL Token Rush! 🚀\n@Novastro_xyz @traderibo123\nPlay now!`);
   window.open(url, "_blank");
 }
