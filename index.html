@@ -11,8 +11,14 @@
 
   <!-- Start screen -->
   <div id="start-screen">
-    <input type="text" id="nickname-input" placeholder="Enter your nickname..." />
-    <button onclick="startGame()">Start Game</button>
+    <h2 class="start-title">Welcome to XNL Token Rush</h2>
+    <p class="start-sub">Enter your nickname to tokenize the future!</p>
+    <img src="assets/frog.png" alt="Frog Mascot" class="start-frog" />
+    <div class="input-area">
+      <input type="text" id="nickname-input" placeholder="Your Name" />
+      <button onclick="startGame()">Start</button>
+    </div>
+    <p class="developer-credit">Crafted with love by @traderibo123 💚</p>
   </div>
 
   <!-- Main game -->
@@ -35,11 +41,18 @@
 
   <!-- Game Over screen -->
   <div id="game-over" class="hidden">
-    <h2>Game Over!</h2>
-    <p><strong id="nickname-label"></strong>, your score:</p>
-    <p><span id="final-score">0</span> XNL</p>
-    <button onclick="shareOnX()">Share on X</button>
+    <h2 class="game-over-title">Well done, Commander!</h2>
+    <p><strong id="nickname-label"></strong>, you scored:</p>
+    <div class="score-box">
+      <span id="final-score">0</span> XNL
+    </div>
+    <button class="share-button" onclick="shareOnX()">🚀 Share on X</button>
+    <p class="developer-credit">Game by @traderibo123 — Powered by Novastro</p>
   </div>
+
+  <footer>
+    <p class="developer-credit">Built by @traderibo123 — Powered by Novastro 🚀</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
