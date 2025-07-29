@@ -1,4 +1,13 @@
-import { db, ref, push, query, orderByChild, limitToLast, get } from './firebase.js';
+import {
+  db,
+  ref,
+  push,
+  query,
+  orderByChild,
+  limitToLast,
+  get,
+  child
+} from './firebase.js';
 
 let nickname = '';
 let score = 0;
@@ -77,13 +86,11 @@ function shuffleArray(array) {
   return array.sort(() => Math.random() - 0.5);
 }
 
-// 🔥 Skor Kaydet
 function saveScore(name, score) {
   const scoresRef = ref(db, 'scores');
   push(scoresRef, { name, score });
 }
 
-// 🔥 Skorları Yükle
 function loadTopScores(callback) {
   const scoresRef = query(ref(db, 'scores'), orderByChild('score'), limitToLast(10));
   get(scoresRef).then(snapshot => {
@@ -91,8 +98,20 @@ function loadTopScores(callback) {
     snapshot.forEach(childSnapshot => {
       scores.push(childSnapshot.val());
     });
-    scores.reverse(); // En yüksek önce
+    scores.reverse();
     callback(scores);
+  });
+}
+
+function loadVisitorCount() {
+  const dbRef = ref(db);
+  get(child(dbRef, 'scores')).then(snapshot => {
+    if (snapshot.exists()) {
+      const count = Object.keys(snapshot.val()).length;
+      document.getElementById("visitor-count").textContent = count;
+    } else {
+      document.getElementById("visitor-count").textContent = "0";
+    }
   });
 }
 
@@ -104,6 +123,7 @@ function endGame() {
   nicknameLabel.textContent = nickname;
 
   saveScore(nickname, score);
+  loadVisitorCount();
 
   loadTopScores(scores => {
     const list = document.getElementById('leaderboard-list');
