@@ -4,115 +4,86 @@ const properties = [
   "Stadium", "Tower", "Villa", "Warehouse", "House"
 ];
 
+let time = 60;
 let score = 0;
-let timeLeft = 60;
-let timerInterval;
-let currentTarget = "";
-let nickname = "";
+let currentProperty = "";
+let timer;
+let playerName = "";
 
 function startGame() {
-  nickname = document.getElementById("nickname-input").value.trim();
-  if (!nickname) {
-    alert("Please enter your nickname.");
-    return;
-  }
-
+  playerName = document.getElementById("player-name").value || "Player";
   document.getElementById("start-screen").classList.add("hidden");
-  document.getElementById("game").classList.remove("hidden");
-  document.getElementById("game-over").classList.add("hidden");
-
+  document.getElementById("game-container").classList.remove("hidden");
   score = 0;
-  timeLeft = 60;
-  document.getElementById("score").innerText = score;
-  document.getElementById("timer").innerText = timeLeft;
-
-  startTimer();
-  generateRound();
+  time = 60;
+  document.getElementById("score").textContent = score;
+  document.getElementById("time").textContent = time;
+  document.getElementById("game-over").classList.add("hidden");
+  nextRound();
+  timer = setInterval(updateTimer, 1000);
 }
 
-function startTimer() {
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    document.getElementById("timer").innerText = timeLeft;
-    if (timeLeft <= 0) {
-      endGame();
-    }
-  }, 1000);
+function updateTimer() {
+  time--;
+  document.getElementById("time").textContent = time;
+  if (time <= 0) {
+    clearInterval(timer);
+    endGame();
+  }
 }
 
-function generateRound() {
-  currentTarget = getRandomProperty();
-  document.getElementById("target-property").innerText = currentTarget.toUpperCase();
+function nextRound() {
+  currentProperty = properties[Math.floor(Math.random() * properties.length)];
+  document.getElementById("property-name").textContent = currentProperty.toUpperCase();
 
-  const options = generateOptions(currentTarget);
-  const optionsContainer = document.getElementById("options");
-  optionsContainer.innerHTML = "";
+  const cardOptions = document.getElementById("card-options");
+  cardOptions.innerHTML = "";
 
-  options.forEach(option => {
-    const card = document.createElement("div");
-    card.className = "option-card";
-    card.innerHTML = `
-      <p>${option.toUpperCase()}</p>
-      <img src="assets/property_icons/${option}.png" alt="${option}" onclick="checkAnswer('${option}')" />
-    `;
-    optionsContainer.appendChild(card);
-  });
-}
-
-function getRandomProperty() {
-  return properties[Math.floor(Math.random() * properties.length)];
-}
-
-function generateOptions(correct) {
-  const options = [correct];
+  const options = [currentProperty];
   while (options.length < 3) {
-    const random = getRandomProperty();
+    const random = properties[Math.floor(Math.random() * properties.length)];
     if (!options.includes(random)) {
       options.push(random);
     }
   }
-  return shuffleArray(options);
-}
 
-function shuffleArray(array) {
-  return array.sort(() => Math.random() - 0.5);
+  shuffleArray(options);
+
+  options.forEach(option => {
+    const card = document.createElement("div");
+    card.innerHTML = `
+      <img src="assets/property_icons/${option}.png" alt="${option}" />
+      <div style="margin-top: 8px; font-weight: bold;">${option.toUpperCase()}</div>
+    `;
+    card.addEventListener("click", () => checkAnswer(option));
+    cardOptions.appendChild(card);
+  });
 }
 
 function checkAnswer(selected) {
-  const isCorrect = selected === currentTarget;
-  if (isCorrect) {
+  if (selected === currentProperty) {
     score += 20;
-    showScoreChange("+20");
   } else {
-    score -= 2;
-    showScoreChange("-2");
+    score -= 10;
   }
-  document.getElementById("score").innerText = score;
-  generateRound();
+  document.getElementById("score").textContent = score;
+  nextRound();
 }
 
 function endGame() {
-  clearInterval(timerInterval);
-  document.getElementById("game").classList.add("hidden");
+  document.getElementById("final-score").textContent = score;
   document.getElementById("game-over").classList.remove("hidden");
-  document.getElementById("final-score").innerText = score;
-  document.getElementById("nickname-label").innerText = nickname;
 }
 
-function shareOnX() {
-  const text = `🏁 I scored ${score} $XNL in $XNL Token Rush by @Novastro_xyz!\nCan you beat me? 💥\nCreated by @traderibo123`;
-  const url = "https://xnl-token-rush.vercel.app/";
-  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
-  window.open(xUrl, "_blank");
+function shareOnTwitter() {
+  const tweet = `I scored ${score} $XNL in $XNL Token Rush 🚀\nPlay here: https://xnl-token-rush.vercel.app/\n@traderibo123 @Novastro_xyz`;
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
+  window.open(url, "_blank");
 }
 
-function showScoreChange(amount) {
-  const floatText = document.createElement("div");
-  floatText.className = "score-float";
-  floatText.innerText = amount;
-  document.body.appendChild(floatText);
-
-  setTimeout(() => {
-    floatText.remove();
-  }, 1000);
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
