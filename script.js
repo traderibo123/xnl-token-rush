@@ -1,91 +1,125 @@
+import { db, ref, push, query, orderByChild, limitToLast, get } from './firebase.js';
+
+let nickname = '';
+let score = 0;
+let timer;
+let currentAnswer = '';
+
+const timeEl = document.getElementById("time");
+const scoreEl = document.getElementById("score");
+const propertyNameEl = document.getElementById("property-name");
+const cardOptionsEl = document.getElementById("card-options");
+const gameContainer = document.getElementById("game-container");
+const startScreen = document.getElementById("start-screen");
+const gameOverScreen = document.getElementById("game-over");
+const finalScoreEl = document.getElementById("final-score");
+const nicknameLabel = document.getElementById("nickname-label");
+
 const properties = [
-  "Apartment", "Bank", "Castle", "Factory", "Field",
-  "Land", "Office", "Plot", "Powerplant", "ShoppingMall",
-  "Stadium", "Tower", "Villa", "Warehouse", "House"
+  "House", "Apartment", "Villa", "Tower", "Castle",
+  "Field", "Office", "ShoppingMall", "Warehouse", "Plot",
+  "Factory", "Powerplant", "Bank", "Land", "Stadium"
 ];
 
-let time = 60;
-let score = 0;
-let currentProperty = "";
-let timer;
-let playerName = "";
-
 function startGame() {
-  playerName = document.getElementById("player-name").value || "Player";
-  document.getElementById("start-screen").classList.add("hidden");
-  document.getElementById("game-container").classList.remove("hidden");
+  nickname = document.getElementById("player-name").value || "Anon";
   score = 0;
-  time = 60;
-  document.getElementById("score").textContent = score;
-  document.getElementById("time").textContent = time;
-  document.getElementById("game-over").classList.add("hidden");
-  nextRound();
-  timer = setInterval(updateTimer, 1000);
+  timeEl.textContent = "60";
+  scoreEl.textContent = "0";
+  startScreen.classList.add("hidden");
+  gameContainer.classList.remove("hidden");
+  gameOverScreen.classList.add("hidden");
+  startTimer();
+  loadNewQuestion();
 }
 
-function updateTimer() {
-  time--;
-  document.getElementById("time").textContent = time;
-  if (time <= 0) {
-    endGame();
-  }
-}
-
-function nextRound() {
-  currentProperty = properties[Math.floor(Math.random() * properties.length)];
-  document.getElementById("property-name").textContent = currentProperty.toUpperCase();
-
-  const cardOptions = document.getElementById("card-options");
-  cardOptions.innerHTML = "";
-
-  const options = [currentProperty];
-  while (options.length < 3) {
-    const random = properties[Math.floor(Math.random() * properties.length)];
-    if (!options.includes(random)) {
-      options.push(random);
+function startTimer() {
+  let time = 60;
+  timer = setInterval(() => {
+    time--;
+    timeEl.textContent = time;
+    if (time <= 0) {
+      clearInterval(timer);
+      endGame();
     }
+  }, 1000);
+}
+
+function loadNewQuestion() {
+  const correct = properties[Math.floor(Math.random() * properties.length)];
+  currentAnswer = correct;
+  propertyNameEl.textContent = correct.toUpperCase();
+  const options = new Set([correct]);
+  while (options.size < 3) {
+    options.add(properties[Math.floor(Math.random() * properties.length)]);
   }
+  renderOptions([...options]);
+}
 
-  shuffleArray(options);
-
-  options.forEach(option => {
-    const card = document.createElement("div");
+function renderOptions(options) {
+  cardOptionsEl.innerHTML = "";
+  shuffleArray(options).forEach(prop => {
+    const card = document.createElement("img");
+    card.src = `assets/property_icons/${prop}.png`;
+    card.alt = prop;
     card.classList.add("card");
-    card.innerHTML = `
-      <img src="assets/property_icons/${option}.png" alt="${option}" />
-      <div style="margin-top: 8px; font-weight: bold;">${option.toUpperCase()}</div>
-    `;
-    card.addEventListener("click", () => checkAnswer(option));
-    cardOptions.appendChild(card);
+    card.onclick = () => {
+      if (prop === currentAnswer) score += 10;
+      else score -= 5;
+      scoreEl.textContent = score;
+      loadNewQuestion();
+    };
+    cardOptionsEl.appendChild(card);
   });
 }
 
-function checkAnswer(selected) {
-  if (selected === currentProperty) {
-    score += 20;
-  } else {
-    score -= 10;
-  }
-  document.getElementById("score").textContent = score;
-  nextRound();
+function shuffleArray(array) {
+  return array.sort(() => Math.random() - 0.5);
+}
+
+// 🔥 Skor Kaydet
+function saveScore(name, score) {
+  const scoresRef = ref(db, 'scores');
+  push(scoresRef, { name, score });
+}
+
+// 🔥 Skorları Yükle
+function loadTopScores(callback) {
+  const scoresRef = query(ref(db, 'scores'), orderByChild('score'), limitToLast(10));
+  get(scoresRef).then(snapshot => {
+    const scores = [];
+    snapshot.forEach(childSnapshot => {
+      scores.push(childSnapshot.val());
+    });
+    scores.reverse(); // En yüksek önce
+    callback(scores);
+  });
 }
 
 function endGame() {
   clearInterval(timer);
-  document.getElementById("card-options").innerHTML = "";
-  document.getElementById("final-score").textContent = score;
-  document.getElementById("game-over").classList.remove("hidden");
+  gameContainer.classList.add("hidden");
+  gameOverScreen.classList.remove("hidden");
+  finalScoreEl.textContent = score;
+  nicknameLabel.textContent = nickname;
+
+  saveScore(nickname, score);
+
+  loadTopScores(scores => {
+    const list = document.getElementById('leaderboard-list');
+    list.innerHTML = '';
+    scores.forEach(entry => {
+      const li = document.createElement('li');
+      li.textContent = `${entry.name}: ${entry.score} $XNL`;
+      list.appendChild(li);
+    });
+  });
 }
 
 function shareOnTwitter() {
-  const tweet = `I scored ${score} $XNL in $XNL Token Rush 🚀\nPlay here: https://xnl-token-rush.vercel.app/\n@traderibo123 @Novastro_xyz`;
-  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`;
-  window.open(url, "_blank");
+  const tweet = `I scored ${score} $XNL in the #XNLTokenRush 🚀\nPlay: https://xnl-token-rush.vercel.app/\n@traderibo123 @Novastro_xyz`;
+  window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, "_blank");
 }
 
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+window.startGame = startGame;
+window.shareOnTwitter = shareOnTwitter;
