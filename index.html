@@ -16,14 +16,6 @@
   </div>
 
   <div id="game" class="hidden">
-    <div class="top-bar">
-      <div class="status-panel">
-        <div>Time: <span id="timer">60</span>s</div>
-        <div>Score: <span id="score">0</span> XNL</div>
-      </div>
-    </div>
-
-    <!-- Konuşma balonu kurbağanın üstünde -->
     <div id="frog-container">
       <div class="speech-bubble" id="speech-text">Tokenize this for me: ...</div>
       <img src="assets/frog.png" alt="Frog Mascot" />
@@ -31,6 +23,12 @@
     </div>
 
     <div id="options" class="card-options"></div>
+
+    <!-- Yeni Time + Score barı -->
+    <div id="status-bar">
+      <div>⏱ Time: <span id="timer">60</span>s</div>
+      <div>💰 Score: <span id="score">0</span> XNL</div>
+    </div>
   </div>
 
   <div id="game-over" class="hidden">
