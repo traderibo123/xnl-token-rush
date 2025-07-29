@@ -15,20 +15,28 @@ h1.game-title {
   text-shadow: 2px 2px 4px #000;
 }
 
+/* Ana ekran kurbağa */
+#start-screen img {
+  width: 100px;
+  max-width: 25vw;
+  margin-top: 10px;
+}
+
 #frog-container {
   position: relative;
-  margin: 20px auto;
-  width: 140px;
+  margin: 0 auto 20px auto;
+  width: 100px;
+  max-width: 25vw;
 }
 
 #frog-container img {
   width: 100%;
-  max-width: 140px;
+  max-width: 100px;
 }
 
 #speech-text {
   position: absolute;
-  top: -40px;
+  top: -50px;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.9);
@@ -36,10 +44,10 @@ h1.game-title {
   padding: 5px 10px;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 0.9rem;
-  max-width: 200px;
-  word-wrap: break-word;
-  box-shadow: 1px 1px 5px #333;
+  font-size: 0.85rem;
+  text-align: center;
+  max-width: 160px;
+  box-shadow: 0 0 4px #000;
 }
 
 .card-options {
@@ -178,3 +186,19 @@ button:hover {
   .card {
     width: 90px;
     height: 90px;
+  }
+
+  #speech-text {
+    font-size: 0.75rem;
+    max-width: 160px;
+    top: -45px;
+  }
+
+  #frog-container {
+    width: 90px;
+  }
+
+  h1.game-title {
+    font-size: 2rem;
+  }
+}
