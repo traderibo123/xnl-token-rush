@@ -1,179 +1,195 @@
 body {
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-image: url('assets/galaxy_bg.jpg');
+  padding: 0;
+  background: url('assets/galaxy_bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  color: white;
+  color: #fff;
   text-align: center;
-  min-height: 100vh;
 }
 
 h1.game-title {
-  font-size: 2.2rem;
   margin-top: 20px;
-  text-shadow: 0 0 8px #00ffff;
-  color: #00ffff;
-}
-
-.start-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 40px;
-}
-
-.input-area {
-  margin-top: 20px;
-}
-
-.input-area input {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-}
-
-.input-area button {
-  margin-left: 10px;
-  padding: 8px 16px;
-  background-color: #00ffff;
-  color: black;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.hidden {
-  display: none;
+  font-size: 2.5rem;
+  color: #ffd700;
+  text-shadow: 2px 2px 4px #000;
 }
 
 #frog-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10px;
+  position: relative;
+  margin: 20px auto;
+  width: 160px;
 }
 
-#frog-img {
-  width: 100px;
-  height: auto;
-  margin-bottom: 5px;
+#frog-container img {
+  width: 100%;
+  max-width: 160px;
 }
 
 #speech-text {
-  font-size: 18px;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.9);
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 10px;
   font-weight: bold;
-  margin-bottom: 15px;
-  line-height: 1.3;
+  font-size: 0.9rem;
+  max-width: 200px;
+  word-wrap: break-word;
+  box-shadow: 1px 1px 5px #333;
 }
 
 .card-options {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  margin: 15px auto;
-  gap: 16px;
-  max-width: 600px;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-.card-options .card {
-  background-color: #001f3f;
-  padding: 8px;
-  border-radius: 12px;
-  border: 3px solid white;
-  cursor: pointer;
+.card {
   width: 100px;
-  transition: transform 0.2s;
+  height: 100px;
+  object-fit: contain;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-.card-options .card:hover {
+.card:hover {
   transform: scale(1.05);
-}
-
-.card-options img {
-  width: 100%;
-  height: auto;
 }
 
 #status-bar {
   display: flex;
   justify-content: center;
   gap: 30px;
-  margin: 15px auto;
-  font-size: 16px;
-  flex-wrap: wrap;
+  margin: 20px auto;
+  font-size: 1rem;
 }
 
-#game-over {
-  margin-top: 25px;
+.status-item {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 5px #000;
 }
 
-.share-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  margin-top: 15px;
+.hidden {
+  display: none;
+}
+
+input#player-name {
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  background-color: #00ffff;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #ffcc00;
   color: #000;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
 }
 
+button:hover {
+  background: #ffaa00;
+}
+
+#game-over {
+  margin-top: 30px;
+}
+
+#final-score {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ffcc;
+}
+
+.share-button {
+  margin-top: 20px;
+  background: #1da1f2;
+  color: white;
+}
+
+.leaderboard-section {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.leaderboard-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.leaderboard-section li {
+  background: rgba(255, 255, 255, 0.1);
+  margin: 5px auto;
+  padding: 5px 10px;
+  border-radius: 8px;
+  max-width: 220px;
+}
+
+.visitor-counter {
+  margin: 15px auto;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 12px;
+  max-width: 300px;
+}
+
 .developer-credit {
-  margin: 20px 0;
-  font-size: 13px;
-  opacity: 0.8;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #ccc;
 }
 
 .developer-credit a {
-  color: #00ffff;
+  color: #ffd700;
   text-decoration: none;
 }
 
-/* 📱 Mobil görünüm düzenlemesi */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .card-options {
     display: grid;
-    grid-template-columns: repeat(2, 40%);
-    justify-content: center;
-    row-gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+    justify-items: center;
   }
 
-  .card-options .card:nth-child(3) {
-    grid-column: span 2;
+  .card-options img:nth-child(3) {
+    grid-column: 1 / span 2;
     justify-self: center;
   }
 
-  .card-options .card {
-    width: 80px;
-    padding: 6px;
-  }
-
-  #frog-img {
-    width: 70px;
+  .card {
+    width: 90px;
+    height: 90px;
   }
 
   #speech-text {
-    font-size: 14px;
+    font-size: 0.75rem;
+    max-width: 160px;
   }
 
-  #status-bar {
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .score-box {
-    font-size: 1rem;
+  #frog-container {
+    width: 140px;
   }
 
   h1.game-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 }
