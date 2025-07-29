@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XNL Token Rush</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1 class="game-title">XNL Token Rush</h1>
+  <div class="game-container">
+    <div id="start-screen">
+      <h2>Enter your nickname to begin:</h2>
+      <input type="text" id="nickname-input" placeholder="Your nickname" />
+      <button onclick="startGame()">Start</button>
+    </div>
+    <div id="game" class="hidden">
+      <div id="property-name"></div>
+      <div id="frog">
+        <img src="assets/frog.png" alt="Frog" />
+        <div id="speech-bubble"><span id="target-property"></span></div>
+      </div>
+      <div id="options"></div>
+      <div id="score">XNL: 0</div>
+      <div id="timer">60</div>
+    </div>
+    <div id="game-over" class="hidden">
+      <h2>Time's up!</h2>
+      <p><span id="nickname-label"></span>'s final score: <span id="final-score"></span> XNL</p>
+      <button onclick="shareOnX()">Share on X</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
