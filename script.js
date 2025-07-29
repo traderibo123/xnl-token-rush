@@ -27,7 +27,6 @@ function updateTimer() {
   time--;
   document.getElementById("time").textContent = time;
   if (time <= 0) {
-    clearInterval(timer);
     endGame();
   }
 }
@@ -51,6 +50,7 @@ function nextRound() {
 
   options.forEach(option => {
     const card = document.createElement("div");
+    card.classList.add("card");
     card.innerHTML = `
       <img src="assets/property_icons/${option}.png" alt="${option}" />
       <div style="margin-top: 8px; font-weight: bold;">${option.toUpperCase()}</div>
@@ -71,6 +71,8 @@ function checkAnswer(selected) {
 }
 
 function endGame() {
+  clearInterval(timer);
+  document.getElementById("card-options").innerHTML = "";
   document.getElementById("final-score").textContent = score;
   document.getElementById("game-over").classList.remove("hidden");
 }
