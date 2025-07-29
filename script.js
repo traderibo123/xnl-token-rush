@@ -105,14 +105,19 @@ function loadTopScores(callback) {
 
 function loadVisitorCount() {
   const dbRef = ref(db);
-  get(child(dbRef, 'scores')).then(snapshot => {
-    if (snapshot.exists()) {
-      const count = Object.keys(snapshot.val()).length;
-      document.getElementById("visitor-count").textContent = count;
-    } else {
+  get(child(dbRef, 'scores'))
+    .then(snapshot => {
+      if (snapshot.exists()) {
+        const count = Object.keys(snapshot.val()).length;
+        document.getElementById("visitor-count").textContent = count;
+      } else {
+        document.getElementById("visitor-count").textContent = "0";
+      }
+    })
+    .catch(error => {
+      console.error("Visitor count error:", error);
       document.getElementById("visitor-count").textContent = "0";
-    }
-  });
+    });
 }
 
 function endGame() {
