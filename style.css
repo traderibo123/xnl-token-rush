@@ -1,3 +1,4 @@
+/* 🌌 Arka Plan */
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +9,7 @@ body {
   text-align: center;
 }
 
+/* Başlık */
 h1.game-title {
   margin-top: 20px;
   font-size: 36px;
@@ -15,6 +17,7 @@ h1.game-title {
   color: #00ffc3;
 }
 
+/* Başlangıç Ekranı */
 #start-screen {
   margin-top: 80px;
 }
@@ -43,10 +46,12 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* Oyun Alanı */
 #game {
   margin-top: 30px;
 }
 
+/* 🐸 Kurbağa + Balon */
 #frog-container {
   position: relative;
   display: flex;
@@ -56,6 +61,22 @@ button:hover {
   margin-bottom: 20px;
 }
 
+/* Kurbağa resmi boyut */
+#frog-container img:first-child {
+  width: 140px;
+  height: auto;
+}
+
+/* Novastro logo */
+#novastro-logo {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  opacity: 0.15;
+}
+
+/* Konuşma balonu */
 .speech-bubble {
   position: absolute;
   top: -60px;
@@ -84,14 +105,7 @@ button:hover {
   border-color: #fff transparent transparent transparent;
 }
 
-#novastro-logo {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80px;
-  opacity: 0.15;
-}
-
+/* Mülk Kartları */
 .card-options {
   display: flex;
   justify-content: center;
@@ -113,6 +127,7 @@ button:hover {
   box-shadow: 0 0 16px #00ffc3, 0 0 6px #fff;
 }
 
+/* ⏱️ Zaman + Skor Barı */
 #status-bar {
   display: flex;
   justify-content: center;
@@ -128,10 +143,12 @@ button:hover {
   text-align: center;
 }
 
+/* 🧾 Oyun Bitti Ekranı */
 #game-over {
   margin-top: 50px;
 }
 
+/* +XNL ve -XNL Efekti */
 .score-float {
   position: absolute;
   top: 50%;
@@ -155,11 +172,12 @@ button:hover {
   }
 }
 
+/* Gizli bölümleri kontrol etmek için */
 .hidden {
   display: none;
 }
 
-/* Responsive mobil uyum */
+/* 📱 Mobil Uyum */
 @media (max-width: 600px) {
   .card-options {
     flex-direction: column;
@@ -177,5 +195,9 @@ button:hover {
 
   #novastro-logo {
     width: 60px;
+  }
+
+  #frog-container img:first-child {
+    width: 100px;
   }
 }
