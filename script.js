@@ -1,83 +1,99 @@
-const properties = [
-  "Apartment", "Bank", "Castle", "Factory", "Field",
-  "Land", "Office", "Plot", "Powerplant", "ShoppingMall",
-  "Stadium", "Tower", "Villa", "Warehouse", "House"
-];
-
+let nickname = "";
 let score = 0;
 let timeLeft = 60;
-let nickname = "";
 let timerInterval;
+let currentProperty = "";
+let properties = [
+  "APARTMENT", "BANK", "CASTLE", "FACTORY", "FIELD",
+  "LAND", "OFFICE", "PLOT", "POWER PLANT", "SHOPPING MALL",
+  "STADIUM", "TOWER", "VILLA", "WAREHOUSE", "HOUSE"
+];
 
-const targetProperty = document.getElementById("target-property");
-const optionsContainer = document.getElementById("options");
-const scoreDisplay = document.getElementById("score");
-const timerDisplay = document.getElementById("timer");
-const finalScore = document.getElementById("final-score");
-const gameOver = document.getElementById("game-over");
-
-function getRandomProperties(correct) {
-  const choices = [correct];
-  while (choices.length < 3) {
-    const random = properties[Math.floor(Math.random() * properties.length)];
-    if (!choices.includes(random)) choices.push(random);
+// shuffle array
+function shuffle(array) {
+  let currentIndex = array.length, temp, randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    temp = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temp;
   }
-  return choices.sort(() => Math.random() - 0.5);
+  return array;
 }
 
-function showScoreChange(value) {
-  const float = document.createElement("div");
-  float.className = "score-float";
-  float.textContent = (value > 0 ? "+" : "") + value + " XNL";
-  document.body.appendChild(float);
-  setTimeout(() => float.remove(), 1000);
-}
-
-function nextQuestion() {
-  optionsContainer.innerHTML = "";
-  const correct = properties[Math.floor(Math.random() * properties.length)];
-  document.getElementById("tokenize-request").innerText = "Tokenize this for me: " + correct.toUpperCase();
-  const choices = getRandomProperties(correct);
-  choices.forEach(choice => {
-    const img = document.createElement("img");
-    img.src = `assets/property_icons/${choice}.png`;
-    img.alt = choice;
-    img.onclick = () => {
-      if (choice === correct) {
-        score += 10;
-        showScoreChange(10);
-      } else {
-        score -= 5;
-        showScoreChange(-5);
-      }
-      scoreDisplay.textContent = score;
-      nextQuestion();
-    };
-    optionsContainer.appendChild(img);
-  });
-}
-
+// Start the game
 function startGame() {
-  nickname = document.getElementById("nickname-input").value.trim();
-  if (!nickname) return alert("Please enter your nickname!");
+  nickname = document.getElementById("nickname-input").value || "Player";
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("game").classList.remove("hidden");
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    timerDisplay.textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      document.getElementById("game").classList.add("hidden");
-      gameOver.classList.remove("hidden");
-      finalScore.textContent = score;
-      document.getElementById("nickname-label").textContent = nickname;
-    }
-  }, 1000);
-  nextQuestion();
+  score = 0;
+  timeLeft = 60;
+  document.getElementById("score").textContent = score;
+  document.getElementById("timer").textContent = timeLeft;
+  timerInterval = setInterval(updateTimer, 1000);
+  setNewProperty();
 }
 
+function updateTimer() {
+  timeLeft--;
+  document.getElementById("timer").textContent = timeLeft;
+  if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    endGame();
+  }
+}
+
+// Show 3 options and pick correct one
+function setNewProperty() {
+  let shuffled = shuffle([...properties]);
+  currentProperty = shuffled[0];
+  const correctIndex = Math.floor(Math.random() * 3);
+  const options = shuffled.slice(1, 3);
+  options.splice(correctIndex, 0, currentProperty);
+
+  const optionsContainer = document.getElementById("options");
+  optionsContainer.innerHTML = "";
+
+  options.forEach((prop) => {
+    const img = document.createElement("img");
+    const fileName = prop.toLowerCase().replace(/\s+/g, '') + ".png";
+    img.src = `assets/${fileName}`;
+    img.alt = prop;
+    img.onclick = () => handleChoice(prop === currentProperty);
+    optionsContainer.appendChild(img);
+  });
+
+  // Konuşma balonunu güncelle
+  document.getElementById("speech-text").textContent = `Tokenize this for me: ${currentProperty}`;
+}
+
+// Handle user choice
+function handleChoice(isCorrect) {
+  const floatText = document.createElement("div");
+  floatText.classList.add("score-float");
+  floatText.textContent = isCorrect ? "+20 XNL" : "-10 XNL";
+  document.body.appendChild(floatText);
+  setTimeout(() => floatText.remove(), 1000);
+
+  score += isCorrect ? 20 : -10;
+  if (score < 0) score = 0;
+  document.getElementById("score").textContent = score;
+  setNewProperty();
+}
+
+// End game
+function endGame() {
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("game-over").classList.remove("hidden");
+  document.getElementById("final-score").textContent = score;
+  document.getElementById("nickname-label").textContent = nickname;
+}
+
+// Share button (X / Twitter)
 function shareOnX() {
-  const url = "https://twitter.com/intent/tweet?text=" +
-    encodeURIComponent(`${nickname} scored ${score} XNL in XNL Token Rush! 🚀\n@Novastro_xyz @traderibo123\nPlay now!`);
-  window.open(url, "_blank");
+  const text = `I scored ${score} XNL in XNL Token Rush! 🚀\nPowered by @Novastro_xyz ✨\nby @traderibo123`;
+  const url = "https://gamesnovastro.vercel.app/";
+  const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+  window.open(xUrl, "_blank");
 }
