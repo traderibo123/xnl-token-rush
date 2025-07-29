@@ -16,7 +16,31 @@ h1 {
   text-shadow: 0 0 10px #fff;
 }
 
-/* Kurbağa + Konuşma balonu */
+.start-screen {
+  margin-top: 100px;
+}
+
+#nicknameInput {
+  padding: 10px;
+  font-size: 16px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+#startButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffd700;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+#gameContainer.hidden {
+  display: none;
+}
+
 #frog-and-text {
   display: flex;
   justify-content: center;
@@ -43,7 +67,6 @@ h1 {
   box-shadow: 0 0 6px #000;
 }
 
-/* Property kartları */
 #property-options {
   display: flex;
   justify-content: center;
@@ -76,7 +99,6 @@ h1 {
   font-weight: bold;
 }
 
-/* Skor ve zaman */
 .stats {
   display: flex;
   justify-content: center;
@@ -92,7 +114,6 @@ h1 {
   font-size: 1rem;
 }
 
-/* Footer */
 footer {
   margin-top: 30px;
   font-size: 0.9rem;
@@ -103,7 +124,6 @@ footer {
   color: #ffcc00;
 }
 
-/* Mobil uyum */
 @media (max-width: 600px) {
   #property-options {
     flex-direction: column;
