@@ -22,7 +22,6 @@ const gameContainer = document.getElementById("game-container");
 const startScreen = document.getElementById("start-screen");
 const gameOverScreen = document.getElementById("game-over");
 const finalScoreEl = document.getElementById("final-score");
-const nicknameLabel = document.getElementById("nickname-label");
 
 const properties = [
   "House", "Apartment", "Villa", "Tower", "Castle",
@@ -73,8 +72,11 @@ function renderOptions(options) {
     card.alt = prop;
     card.classList.add("card");
     card.onclick = () => {
-      if (prop === currentAnswer) score += 10;
-      else score -= 5;
+      if (prop === currentAnswer) {
+        score += 10;
+      } else {
+        score = Math.max(0, score - 5);
+      }
       scoreEl.textContent = score;
       loadNewQuestion();
     };
@@ -106,12 +108,8 @@ function loadTopScores(callback) {
 function loadVisitorCount() {
   const dbRef = ref(db);
   get(child(dbRef, 'scores')).then(snapshot => {
-    if (snapshot.exists()) {
-      const count = Object.keys(snapshot.val()).length;
-      document.getElementById("visitor-count").textContent = count;
-    } else {
-      document.getElementById("visitor-count").textContent = "0";
-    }
+    const count = snapshot.exists() ? Object.keys(snapshot.val()).length : 0;
+    document.getElementById("visitor-count").textContent = count;
   });
 }
 
@@ -120,7 +118,6 @@ function endGame() {
   gameContainer.classList.add("hidden");
   gameOverScreen.classList.remove("hidden");
   finalScoreEl.textContent = score;
-  nicknameLabel.textContent = nickname;
 
   saveScore(nickname, score);
   loadVisitorCount();
@@ -137,7 +134,7 @@ function endGame() {
 }
 
 function shareOnTwitter() {
-  const tweet = `I scored ${score} $XNL in the #XNLTokenRush 🚀\nPlay: https://xnl-token-rush.vercel.app/\n@traderibo123 @Novastro_xyz`;
+  const tweet = `I scored ${score} $XNL in the #XNLTokenRush 🚀\nPlay: https://novastro-token-rush-tau.vercel.app/\n@traderibo123 @Novastro_xyz`;
   window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweet)}`, "_blank");
 }
 
