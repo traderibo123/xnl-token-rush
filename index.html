@@ -7,40 +7,45 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>$XNL Token Rush</h1>
 
-  <!-- GİRİŞ EKRANI -->
-  <div id="startScreen" class="start-screen">
-    <h2>Welcome to $XNL Token Rush</h2>
-    <input type="text" id="nicknameInput" placeholder="Enter your nickname" />
-    <button id="startButton">Start Game</button>
+  <!-- Giriş ekranı -->
+  <div id="startScreen">
+    <h1>$XNL Token Rush</h1>
+    <p>Enter your nickname to start:</p>
+    <input type="text" id="nicknameInput" placeholder="Your name..." />
+    <button id="startButton">Start</button>
   </div>
 
-  <!-- OYUN ALANI -->
+  <!-- Oyun ekranı -->
   <div id="gameContainer" class="hidden">
+
+    <!-- Üst Bilgi -->
+    <div id="header">
+      <div id="timer">60s</div>
+      <div id="score">0 $XNL</div>
+    </div>
+
+    <!-- Kurbağa + yazı -->
     <div id="frog-and-text">
-      <img id="frog" src="assets/frog.png" alt="Frog" />
+      <img src="assets/frog.png" alt="frog" />
       <div id="speech-text">
-        Tokenize this for me:<br /><strong id="property-name">PLOT</strong>
+        Tokenize this for me!<br />
+        <span id="property-name">???</span>
       </div>
     </div>
 
-    <div id="property-options">
-      <div class="property-card"><p>TOWER</p><img src="assets/property_icons/Tower.png" alt="Tower" /></div>
-      <div class="property-card"><p>WAREHOUSE</p><img src="assets/property_icons/Warehouse.png" alt="Warehouse" /></div>
-      <div class="property-card"><p>PLOT</p><img src="assets/property_icons/Plot.png" alt="Plot" /></div>
-    </div>
+    <!-- Varlık kartları -->
+    <div id="property-options"></div>
 
-    <div class="stats">
-      <div class="stat">⏱ Time: <span id="timer">60s</span></div>
-      <div class="stat">🪙 Score: <span id="score">0 $XNL</span></div>
-    </div>
+    <!-- Ziyaretçi sayısı -->
+    <p style="margin-top: 30px;">
+      👥 Visited by Novastars: <span id="visitor-count">Loading...</span>
+    </p>
   </div>
 
-  <footer>
-    Built by <span class="dev">@traderibo123</span> — Powered by <strong>Novastro 🚀</strong>
-  </footer>
-
-  <script src="script.js" type="module"></script>
+  <!-- Firebase -->
+  <script type="module" src="firebase.js"></script>
+  <!-- Oyun scripti -->
+  <script type="module" src="script.js"></script>
 </body>
 </html>
