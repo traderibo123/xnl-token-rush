@@ -1,0 +1,14 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: url('assets/galaxy_bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #ffffff;
+  text-align: center;
+}
+#frog-img {
+  width: 140px;
+  height: auto;
+}
