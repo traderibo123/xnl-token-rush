@@ -18,16 +18,51 @@ h1.game-title {
   margin: 20px 0;
 }
 
-#nickname-input {
-  padding: 8px;
-  font-size: 16px;
+.start-title {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px #00f0ff;
 }
 
-button {
-  padding: 8px 16px;
+.start-sub {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.start-frog {
+  width: 90px;
+  margin-bottom: 20px;
+  animation: floatFrog 3s ease-in-out infinite;
+}
+
+@keyframes floatFrog {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.input-area input {
+  padding: 8px;
   font-size: 16px;
+  border-radius: 6px;
+  border: none;
+}
+
+.input-area button {
   margin-left: 10px;
+  background-color: #00f0ff;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  box-shadow: 0 0 10px #00f0ff;
   cursor: pointer;
+}
+
+.input-area button:hover {
+  background-color: #00bcd4;
+  box-shadow: 0 0 14px #00f0ff;
 }
 
 #frog-container {
@@ -88,6 +123,49 @@ button {
   margin-top: 40px;
   font-size: 22px;
   color: #ffcc00;
+}
+
+.score-box {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  margin: 20px auto;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ff99;
+  width: 180px;
+  border: 3px solid #00ff99;
+  border-radius: 12px;
+}
+
+.share-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1da1f2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #1da1f2;
+  cursor: pointer;
+}
+
+.share-button:hover {
+  background-color: #0c85d0;
+  box-shadow: 0 0 15px #1da1f2;
+}
+
+footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.developer-credit {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-top: 20px;
+  text-shadow: 0 0 5px #000;
+  font-style: italic;
 }
 
 .hidden {
