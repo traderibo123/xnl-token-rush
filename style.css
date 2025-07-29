@@ -18,12 +18,12 @@ h1.game-title {
 #frog-container {
   position: relative;
   margin: 20px auto;
-  width: 160px;
+  width: 140px;
 }
 
 #frog-container img {
   width: 100%;
-  max-width: 160px;
+  max-width: 140px;
 }
 
 #speech-text {
@@ -46,7 +46,7 @@ h1.game-title {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 20px;
 }
 
@@ -178,18 +178,3 @@ button:hover {
   .card {
     width: 90px;
     height: 90px;
-  }
-
-  #speech-text {
-    font-size: 0.75rem;
-    max-width: 160px;
-  }
-
-  #frog-container {
-    width: 140px;
-  }
-
-  h1.game-title {
-    font-size: 2rem;
-  }
-}
