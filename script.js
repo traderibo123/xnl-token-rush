@@ -9,7 +9,7 @@ let properties = [
   "STADIUM", "TOWER", "VILLA", "WAREHOUSE", "HOUSE"
 ];
 
-// shuffle array
+// Shuffle array
 function shuffle(array) {
   let currentIndex = array.length, temp, randomIndex;
   while (currentIndex !== 0) {
@@ -58,13 +58,13 @@ function setNewProperty() {
   options.forEach((prop) => {
     const img = document.createElement("img");
     const fileName = prop.toLowerCase().replace(/\s+/g, '') + ".png";
-    img.src = `assets/${fileName}`;
+    img.src = `assets/property_icons/${fileName}`;
     img.alt = prop;
     img.onclick = () => handleChoice(prop === currentProperty);
     optionsContainer.appendChild(img);
   });
 
-  // Konuşma balonunu güncelle
+  // Update frog speech bubble
   document.getElementById("speech-text").textContent = `Tokenize this for me: ${currentProperty}`;
 }
 
@@ -90,7 +90,7 @@ function endGame() {
   document.getElementById("nickname-label").textContent = nickname;
 }
 
-// Share button (X / Twitter)
+// Share on X (Twitter)
 function shareOnX() {
   const text = `I scored ${score} XNL in XNL Token Rush! 🚀\nPowered by @Novastro_xyz ✨\nby @traderibo123`;
   const url = "https://gamesnovastro.vercel.app/";
