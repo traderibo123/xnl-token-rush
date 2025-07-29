@@ -100,7 +100,7 @@ function endGame() {
 }
 
 function shareOnX() {
-  const text = `🏁 I scored ${score} $XNL in XNL Token Rush by @Novastro_xyz!\nCan you beat me? 💥\nCreated by @traderibo123`;
+  const text = `🏁 I scored ${score} $XNL in $XNL Token Rush by @Novastro_xyz!\nCan you beat me? 💥\nCreated by @traderibo123`;
   const url = "https://xnl-token-rush.vercel.app/";
   const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
   window.open(xUrl, "_blank");
