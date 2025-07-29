@@ -9,7 +9,7 @@ let properties = [
   "STADIUM", "TOWER", "VILLA", "WAREHOUSE", "HOUSE"
 ];
 
-// Shuffle array
+// Karıştırma fonksiyonu
 function shuffle(array) {
   let currentIndex = array.length, temp, randomIndex;
   while (currentIndex !== 0) {
@@ -22,7 +22,7 @@ function shuffle(array) {
   return array;
 }
 
-// Start the game
+// Oyunu başlat
 function startGame() {
   nickname = document.getElementById("nickname-input").value || "Player";
   document.getElementById("start-screen").classList.add("hidden");
@@ -35,6 +35,7 @@ function startGame() {
   setNewProperty();
 }
 
+// Zamanlayıcıyı güncelle
 function updateTimer() {
   timeLeft--;
   document.getElementById("timer").textContent = timeLeft;
@@ -44,7 +45,7 @@ function updateTimer() {
   }
 }
 
-// Show 3 options and pick correct one
+// Yeni mülk ve seçenekleri göster
 function setNewProperty() {
   let shuffled = shuffle([...properties]);
   currentProperty = shuffled[0];
@@ -56,19 +57,20 @@ function setNewProperty() {
   optionsContainer.innerHTML = "";
 
   options.forEach((prop) => {
+    const fileName = prop.toLowerCase().replace(/\s+/g, '');
+    const formattedName = fileName.charAt(0).toUpperCase() + fileName.slice(1);
     const img = document.createElement("img");
-    const fileName = prop.toLowerCase().replace(/\s+/g, '') + ".png";
-    img.src = `assets/property_icons/${fileName}`;
+    img.src = `assets/property_icons/${formattedName}.png`;
     img.alt = prop;
     img.onclick = () => handleChoice(prop === currentProperty);
     optionsContainer.appendChild(img);
   });
 
-  // Update frog speech bubble
+  // Kurbağanın konuşma balonunu güncelle
   document.getElementById("speech-text").textContent = `Tokenize this for me: ${currentProperty}`;
 }
 
-// Handle user choice
+// Seçimi değerlendir
 function handleChoice(isCorrect) {
   const floatText = document.createElement("div");
   floatText.classList.add("score-float");
@@ -82,7 +84,7 @@ function handleChoice(isCorrect) {
   setNewProperty();
 }
 
-// End game
+// Oyunu bitir
 function endGame() {
   document.getElementById("game").classList.add("hidden");
   document.getElementById("game-over").classList.remove("hidden");
@@ -90,7 +92,7 @@ function endGame() {
   document.getElementById("nickname-label").textContent = nickname;
 }
 
-// Share on X (Twitter)
+// X'te paylaş
 function shareOnX() {
   const text = `I scored ${score} XNL in XNL Token Rush! 🚀\nPowered by @Novastro_xyz ✨\nby @traderibo123`;
   const url = "https://gamesnovastro.vercel.app/";
